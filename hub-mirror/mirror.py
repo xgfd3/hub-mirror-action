@@ -121,7 +121,7 @@ class Mirror(object):
             lines = f.readlines()
             for line in lines:
                 print(line)
-                r = subprocess.run(args=line, shell=True, encoding='utf-8', stdout=PIPE)
+                r = subprocess.run(args=line, shell=True, encoding='utf-8')
                 print(r.stdout)
             
             f.close()
