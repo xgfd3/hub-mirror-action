@@ -122,7 +122,7 @@ class Mirror(object):
             for line in lines:
                 print(line)
                 r = os.popen(line)
-                print(r)
+                print(r.buffer)
             
             f.close()
         except FileNotFoundError:
