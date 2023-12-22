@@ -119,13 +119,9 @@ class Mirror(object):
         print("(4/3) Execute " + path + "...")
         try:
             f = open(path)
-            lines = f.readlines()
-            for line in lines:
-                print(line)
-                r = subprocess.Popen(line, stdin=subprocess.PIPE, stderr=sys.stderr, close_fds=True, stdout=sys.stdout, universal_newlines=True, shell=True, bufsize=1)
-                r.communicate()
-                print(r.returncode())
-            
+            r = subprocess.Popen(path, stdin=subprocess.PIPE, stderr=sys.stderr, close_fds=True, stdout=sys.stdout, universal_newlines=True, shell=True, bufsize=1)
+            r.communicate()
+            print(r.returncode())
             f.close()
         except FileNotFoundError:
             print("File china_resp_change.sh is not found.")
