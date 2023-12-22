@@ -113,10 +113,10 @@ class Mirror(object):
         if self._check_empty(local_repo):
             print("Empty repo %s, skip pushing." % self.src_url)
             return
+        path = self.repo_path + "/china_resp_change.sh"
+        print("(4/3) Execute " + path + "...")
         try:
-            path = self.repo_path + "/china_resp_change.sh"
             f = open(path)
-            print("File china_resp_change.sh found. path=" + path)
             os.system(f.read)
             f.close()
         except FileNotFoundError:
