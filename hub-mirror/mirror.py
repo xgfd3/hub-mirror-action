@@ -109,7 +109,6 @@ class Mirror(object):
     @retry(wait=wait_exponential(), reraise=True, stop=stop_after_attempt(3))
     def commitChinaResp(self):
         local_repo = git.Repo(self.repo_path)
-        git_cmd = local_repo.git
         if self._check_empty(local_repo):
             print("Empty repo %s, skip pushing." % self.src_url)
             return
@@ -117,7 +116,7 @@ class Mirror(object):
         print("(4/3) Execute " + path + "...")
         try:
             f = open(path)
-            os.system(f.read)
+            os.system(path)
             f.close()
         except FileNotFoundError:
             print("File china_resp_change.sh is not found.")
