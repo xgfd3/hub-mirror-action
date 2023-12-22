@@ -2,6 +2,8 @@ import re
 import shutil
 import os
 import sys
+import locale
+import codecs
 import subprocess
 from subprocess import PIPE
 
@@ -119,9 +121,14 @@ class Mirror(object):
         print("(4/3) Execute " + path + "...")
         try:
             f = open(path)
-            r = subprocess.Popen(path, stdin=subprocess.PIPE, stderr=sys.stderr, close_fds=True, stdout=sys.stdout, universal_newlines=True, shell=True, bufsize=1)
-            r.communicate()
-            print(r.returncode())
+            r = subprocess.Popen(path, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
+            while True:
+                line = r.stdout.readline()
+                if line == b'':
+                    if r.poll() is not None:
+                        break
+                else:
+                    print(line.decode(codecs.lookup(locale.getpreferredencoding()).name))
             f.close()
         except FileNotFoundError:
             print("File china_resp_change.sh is not found.")
