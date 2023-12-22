@@ -1,6 +1,7 @@
 import re
 import shutil
 import os
+import sys
 import subprocess
 from subprocess import PIPE
 
@@ -121,8 +122,9 @@ class Mirror(object):
             lines = f.readlines()
             for line in lines:
                 print(line)
-                r = os.popen(line)
-                print(r.buffer)
+                r = subprocess.Popen(line, stdin=subprocess.PIPE, stderr=sys.stderr, close_fds=True, stdout=sys.stdout, universal_newlines=True, shell=True, bufsize=1)
+                r.communicate()
+                print(r.returncode())
             
             f.close()
         except FileNotFoundError:
