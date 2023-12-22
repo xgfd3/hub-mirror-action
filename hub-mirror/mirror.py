@@ -120,6 +120,7 @@ class Mirror(object):
             f = open(path)
             lines = f.readlines()
             for line in lines:
+                print(line)
                 r = subprocess.run(args=line, shell=True, encoding='utf-8', stdout=PIPE)
                 print(r.stdout)
             
