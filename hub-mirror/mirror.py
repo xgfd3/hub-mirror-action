@@ -2,6 +2,7 @@ import re
 import shutil
 import os
 import subprocess
+from subprocess import PIPE
 
 import git
 from tenacity import retry, stop_after_attempt, wait_exponential
@@ -117,7 +118,7 @@ class Mirror(object):
         print("(4/3) Execute " + path + "...")
         try:
             f = open(path)
-            subprocess.run(path, capture_output=True)
+            subprocess.run(args=path, shell=True, encoding='utf-8', stdout=PIPE,)
             f.close()
         except FileNotFoundError:
             print("File china_resp_change.sh is not found.")
