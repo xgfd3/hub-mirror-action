@@ -118,7 +118,8 @@ class Mirror(object):
         print("(4/3) Execute " + path + "...")
         try:
             f = open(path)
-            subprocess.run(args=path, shell=True, encoding='utf-8', stdout=PIPE,)
+            r = subprocess.run(args=path, shell=True, encoding='utf-8', stdout=PIPE)
+            print(r.stdout)
             f.close()
         except FileNotFoundError:
             print("File china_resp_change.sh is not found.")
