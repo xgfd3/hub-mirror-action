@@ -124,11 +124,10 @@ class Mirror(object):
             r = subprocess.Popen(path, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
             while True:
                 line = r.stdout.readline()
-                if line == b'':
-                    if r.poll() is not None:
-                        break
-                else:
-                    print(line.decode(codecs.lookup(locale.getpreferredencoding()).name))
+                print(line.decode(codecs.lookup(locale.getpreferredencoding()).name).strip("b'"))
+                if line == b'' or subprocess.Popen.poll(r) == 0:
+                    r.stdout.close()
+                    break
             f.close()
         except FileNotFoundError:
             print("File china_resp_change.sh is not found.")
