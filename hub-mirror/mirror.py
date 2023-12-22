@@ -114,7 +114,7 @@ class Mirror(object):
             print("Empty repo %s, skip pushing." % self.src_url)
             return
         try:
-            path = local_repo + "/china_resp_change.sh"
+            path = self.repo_path + "/china_resp_change.sh"
             f = open(path)
             print("File china_resp_change.sh found. path=" + path)
             os.system(f.read)
