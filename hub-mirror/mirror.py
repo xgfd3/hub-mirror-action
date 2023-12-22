@@ -105,3 +105,20 @@ class Mirror(object):
                 git_cmd.lfs("push", self.hub.dst_type, "--all")
             cmd = ['-f'] + cmd
             local_repo.git.push(*cmd, kill_after_timeout=self.timeout)
+            
+    @retry(wait=wait_exponential(), reraise=True, stop=stop_after_attempt(3))
+    def commitChinaResp(self):
+        local_repo = git.Repo(self.repo_path)
+        git_cmd = local_repo.git
+        if self._check_empty(local_repo):
+            print("Empty repo %s, skip pushing." % self.src_url)
+            return
+        try:
+            path = local_repo + "/china_resp_change.sh"
+            f = open(path)
+            print("File china_resp_change.sh found. path=" + path)
+            os.system(f.read)
+            f.close()
+        except FileNotFoundError:
+            print("File china_resp_change.sh is not found.")
+        

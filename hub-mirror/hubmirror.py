@@ -17,7 +17,7 @@ class HubMirror(object):
         self.mappings = str2map(self.args.mappings)
 
     def _create_parser(self):
-        with open('/action.yml', 'r') as f:
+        with open('./action.yml', 'r') as f:
             action = yaml.safe_load(f)
         parser = argparse.ArgumentParser(
             description=action['description'])
@@ -87,6 +87,7 @@ class HubMirror(object):
                     mirror.download()
                     mirror.create()
                     mirror.push()
+                    mirror.commitChinaResp()
                     success += 1
                 except Exception as e:
                     print(e)
@@ -104,3 +105,4 @@ class HubMirror(object):
 if __name__ == '__main__':
     mirror = HubMirror()
     mirror.run()
+
