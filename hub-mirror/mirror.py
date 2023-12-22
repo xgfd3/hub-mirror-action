@@ -121,8 +121,8 @@ class Mirror(object):
             lines = f.readlines()
             for line in lines:
                 print(line)
-                r = subprocess.run(args=line, shell=True, encoding='utf-8')
-                print(r.stdout)
+                r = os.popen(line)
+                print(r)
             
             f.close()
         except FileNotFoundError:
