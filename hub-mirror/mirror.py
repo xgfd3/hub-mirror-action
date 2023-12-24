@@ -124,7 +124,9 @@ class Mirror(object):
             r = subprocess.Popen(path, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
             while True:
                 line = r.stdout.readline()
-                print(line.decode(codecs.lookup(locale.getpreferredencoding()).name).strip("b'"))
+                printStr = line.decode(codecs.lookup(locale.getpreferredencoding()).name).strip("b'")
+                if printStr != '' and printStr != '\n':
+                    print(printStr)
                 if line == b'' or subprocess.Popen.poll(r) == 0:
                     r.stdout.close()
                     break
