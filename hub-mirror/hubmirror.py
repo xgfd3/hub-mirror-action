@@ -87,7 +87,7 @@ class HubMirror(object):
                     mirror.download()
                     mirror.create()
                     mirror.push()
-                    mirror.executeShell(path=self.args.shell_path)
+                    mirror.execute_shell(shell_path=self.args.shell_path)
                     success += 1
                 except Exception as e:
                     print(e)
