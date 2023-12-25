@@ -137,5 +137,5 @@ class Mirror(object):
                     break
             f.close()
         except FileNotFoundError:
-            print("File china_resp_change.sh is not found.")
+            print("File " + shell_path + " is not found.")
         
