@@ -56,6 +56,9 @@ inputs:
   lfs:
     description: "Enable Git LFS support."
     default: false
+  shell_path:
+    description: "The shell path executing after repos synchronized"
+    default: ''
 runs:
   using: "docker"
   image: "Dockerfile"
@@ -77,3 +80,4 @@ runs:
     - ${{ inputs.timeout}}
     - ${{ inputs.mappings}}
     - ${{ inputs.lfs }}
+    - ${{ inputs.shell_path }}

@@ -112,20 +112,25 @@ class Mirror(object):
             local_repo.git.push(*cmd, kill_after_timeout=self.timeout)
             
     @retry(wait=wait_exponential(), reraise=True, stop=stop_after_attempt(3))
-    def commitChinaResp(self):
+    def executeShell(self, shell_path=''):
+        if shell_path == '':
+            return
         local_repo = git.Repo(self.repo_path)
         if self._check_empty(local_repo):
             print("Empty repo %s, skip pushing." % self.src_url)
             return
-        path = self.repo_path + "/china_resp_change.sh"
+        path = self.repo_path + "/" + shell_path
         print("(4/3) Execute " + path + "...")
         try:
             f = open(path)
-            r = subprocess.Popen(path, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
+            
+            cmd = "cd " + self.repo_path + " && " + shell_path
+            print("cmd = " + cmd)
+            r = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
             while True:
                 line = r.stdout.readline()
                 printStr = line.decode(codecs.lookup(locale.getpreferredencoding()).name).strip("b'")
-                if printStr != '' and printStr != '\n':
+                if printStr != '' and printStr != ' ' and printStr != '\n':
                     print(printStr)
                 if line == b'' or subprocess.Popen.poll(r) == 0:
                     r.stdout.close()

@@ -28,7 +28,8 @@ python3 /hub-mirror/hubmirror.py --src "${INPUT_SRC}" --dst "${INPUT_DST}" \
 --debug "${INPUT_DEBUG}" \
 --timeout  "${INPUT_TIMEOUT}" \
 --mappings  "${INPUT_MAPPINGS}" \
---lfs "${INPUT_LFS}"
+--lfs "${INPUT_LFS}" \
+--shell-path "${INPUT_SHELL_PATH}"
 
 # Skip original code
 exit $?
