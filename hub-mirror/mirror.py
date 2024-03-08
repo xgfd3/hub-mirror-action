@@ -125,9 +125,9 @@ class Mirror(object):
             f = open(path)
             
             cmd = "cd " + self.repo_path
-            if github_ref != '':
+            if github_ref != '' and 'refs/heads' in github_ref:
                 cmd += " && " + "export GITHUB_REF=" + github_ref
-                cmd += " && " + "git checkout $(echo ${GITHUB_REF#refs/heads/})"
+                cmd += " && " + "git checkout --track gitee/$(echo ${GITHUB_REF#refs/heads/})"
             cmd += " && " + shell_path
             print("cmd = " + cmd)
             r = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
