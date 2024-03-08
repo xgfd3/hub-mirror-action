@@ -59,8 +59,8 @@ inputs:
   shell_path:
     description: "The shell path executing after repos synchronized"
     default: ''
-  shell_arg:
-    description: "The shell argument"
+  github_ref:
+    description: "The github ref"
     default: ''
 runs:
   using: "docker"
@@ -84,4 +84,4 @@ runs:
     - ${{ inputs.mappings}}
     - ${{ inputs.lfs }}
     - ${{ inputs.shell_path }}
-    - ${{ inputs.shell_arg }}
+    - ${{ inputs.github_ref }}

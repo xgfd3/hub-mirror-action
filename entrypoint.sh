@@ -30,7 +30,7 @@ python3 /hub-mirror/hubmirror.py --src "${INPUT_SRC}" --dst "${INPUT_DST}" \
 --mappings  "${INPUT_MAPPINGS}" \
 --lfs "${INPUT_LFS}" \
 --shell-path "${INPUT_SHELL_PATH}" \
---shell-arg "${INPUT_SHELL_ARG}"
+--github-ref "${INPUT_GITHUB_REF}"
 
 # Skip original code
 exit $?
