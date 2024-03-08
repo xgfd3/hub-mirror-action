@@ -59,6 +59,9 @@ inputs:
   shell_path:
     description: "The shell path executing after repos synchronized"
     default: ''
+  shell_arg:
+    description: "The shell argument"
+    default: ''
 runs:
   using: "docker"
   image: "Dockerfile"
@@ -81,3 +84,4 @@ runs:
     - ${{ inputs.mappings}}
     - ${{ inputs.lfs }}
     - ${{ inputs.shell_path }}
+    - ${{ inputs.shell_arg }}

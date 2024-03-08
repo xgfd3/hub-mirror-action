@@ -112,7 +112,7 @@ class Mirror(object):
             local_repo.git.push(*cmd, kill_after_timeout=self.timeout)
             
     @retry(wait=wait_exponential(), reraise=True, stop=stop_after_attempt(3))
-    def execute_shell(self, shell_path=''):
+    def execute_shell(self, shell_path='', shell_arg=''):
         if shell_path == '':
             return
         local_repo = git.Repo(self.repo_path)
@@ -124,7 +124,7 @@ class Mirror(object):
         try:
             f = open(path)
             
-            cmd = "cd " + self.repo_path + " && " + shell_path
+            cmd = "cd " + self.repo_path + " && " + shell_path + " " + shell_arg
             print("cmd = " + cmd)
             r = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
             while True:
